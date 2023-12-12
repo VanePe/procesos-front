@@ -1,6 +1,6 @@
 //funciones para operaciones crud
-const urlApiUser = "http://localhost:8088/users";//colocar la url con el puerto
-const headersUser= {
+const urlApiCategory = "http://localhost:8088/users";//colocar la url con el puerto
+const headersCategory= {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${localStorage.token}`
@@ -14,21 +14,21 @@ function categorias(){
     }
     fetch(urlApiCategory, settings)
     .then(response => response.json())
-    .then(function(category){
+    .then(function(categories){
         
             var categorias = '';
-            for(const categoria of category){
+            for(const categoria of categories){
                 categorias += `
                 <tr>
-                    <th scope="row">${categoria.id}</th>
+                    <th scope="row">${categoria.idCategory}</th>
                     <td>${categoria.firstName}</td>
                     <td>${categoria.lastName}</td>
                     <td>${categoria.email}</td>
                     <td>
-                    <a href="#" onclick="verModificarCategoria('${categoria.id}')" class="btn btn-outline-warning">
+                    <a href="#" onclick="verModificarCategoria('${categoria.idCategory}')" class="btn btn-outline-warning">
                         <i class="fa-solid fa-user-pen"></i>
                     </a>
-                    <a href="#" onclick="verCategoria('${categoria.id}')" class="btn btn-outline-info">
+                    <a href="#" onclick="verCategoria('${categoria.idCategory}')" class="btn btn-outline-info">
                         <i class="fa-solid fa-eye"></i>
                     </a>
                     </td>
@@ -39,13 +39,13 @@ function categorias(){
     })
 }
 
-function vverModificarCategoria(id){
+function verModificarCategoria(idCategory){
     validaToken();
     var settings={
         method: 'GET',
         headers:headersCategory,
     }
-    fetch(urlApiCategory+"/"+id, settings)
+    fetch(urlApiCategory+"/"+idCategory, settings)
     .then(categoria => categoria.json())
     .then(function(categoria){
             var cadena='';
@@ -56,7 +56,7 @@ function vverModificarCategoria(id){
                 </div>
               
                 <form action="" method="post" id="modificar">
-                    <input type="hidden" name="id" id="id" value="${categoria.id}">
+                    <input type="hidden" name="idCategory" id="idCategory" value="${categoria.idCategory}">
                     <label for="nameCategory" class="form-label">First Name</label>
                     <input type="text" class="form-control" name="nameCategory" id="nameCategory" required value="${usuario.nameCategory}"> <br>
                     <label for="descriptionCategory"  class="form-label">Last Name</label>
@@ -72,7 +72,7 @@ function vverModificarCategoria(id){
     })
 }
 
-async function modificarCategoria(id){
+async function modificarCategoria(idCategory){
     validaToken();
     var myForm = nameCategory.getElementById("modificar");
     var formData = new FormData(myForm);
@@ -80,7 +80,7 @@ async function modificarCategoria(id){
     for(var [k, v] of formData){//convertimos los datos a json
         jsonData[k] = v;
     }
-    const request = await fetch(urlApiUser+"/"+id, {
+    const request = await fetch(urlApiCategory+"/"+idCategory, {
         method: 'PUT',
         headers:headersCategory,
         body: JSON.stringify(jsonData)
@@ -107,13 +107,13 @@ async function modificarCategoria(id){
     modal.hide();
 }
 
-function verCategoria(id){
+function verCategoria(idCategory){
     validaToken();
     var settings={
         method: 'GET',
         headers:headersCategory,
     }
-    fetch(urlApiUser+"/"+id, settings)
+    fetch(urlApiCategory+"/"+idCategory, settings)
     .then(categoria => categoria.json())
     .then(function(categoria){
             var cadena='';
@@ -176,7 +176,7 @@ function createCategoryForm(){
             </div>
               
             <form action="" method="post" id="registerForm">
-                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="idCategory" id="idCategory">
                 <label for="nameCategory" class="form-label">Name Category</label>
                 <input type="text" class="form-control" name="nameCategory" id="nameCategory" required> <br>
                 <label for="descriptionCategory"  class="form-label">Description</label>
@@ -188,13 +188,13 @@ function createCategoryForm(){
             myModal.toggle();
 }
 
-function eliminaCategoria(id){
+function eliminaCategoria(idCategory){
     validaToken();
     var settings={
         method: 'DELETE',
         headers:headersCategory,
     }
-    fetch(urlApiUser+"/"+id,settings)
+    fetch(urlApiCategory+"/"+idCategory,settings)
     .then(response => response.json())
     .then(function(data){
         listar();
