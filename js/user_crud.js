@@ -215,3 +215,4 @@ function eliminaUsuario(id){
         alertas("The user has been deleted successfully!",2)
     })
 }
+
