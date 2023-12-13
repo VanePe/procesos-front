@@ -15,10 +15,13 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="documento.html" onclick="listar()">Users</a>
+                    <a class="nav-link active" aria-current="page" href="dashboard.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="dashboard.html" onclick="categorias()">Categories</a>
+                    <a class="nav-link" href="dashboard.html" onclick="listar()">Users</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="categoria.html" onclick="categorias()">Categories</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="articulo.html" onclick="articulos()">Articles</a>
@@ -40,22 +43,21 @@
                   <div id="datos"></div>
 
                   <div class="p-3 mb-2 bg-light text-dark">
-                    <h1 class="display-5"><i class="fa-solid fa-list"></i> List of category </h1>
+                    <h1 class="display-5"><i class="fa-solid fa-list"></i> List of users </h1>
                   </div>
                   
-                  <a href="#" onclick="createArticleForm()" class="btn btn-outline-success"><i class="fa-solid fa-user-plus"></i></a>
+                  <a href="#" onclick="createUserForm()" class="btn btn-outline-success"><i class="fa-solid fa-user-plus"></i></a>
                   <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name Article</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">description Article</th>
-                        <th scope="col">Price Article</th>
-                        <th scope="col">Category</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
-                    <tbody id="articulos">
+                    <tbody id="listar">
 
                     </tbody>
                   </table>
@@ -64,11 +66,11 @@
           </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalArticulo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Articles Management</h5>
+                <h5 class="modal-title" id="exampleModalLabel">User Management</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body" id="contentModal">
@@ -99,9 +101,10 @@
       <script src="js/util.js"></script>
       <script src="js/auth_service.js"></script>
       <script src="js/user_crud.js"></script>
+      <script src="js/categories_crud.js"></script>
       <script src="js/articulo_crud.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       <script>
-        articulos();
+        listar();
       </script>
 </html>
